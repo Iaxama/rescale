@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<application>
+    <name> imgRescale </name>
+
+    <module>
+        <name> rescale </name>
+        <parameters> --name /rescale/left --width 320 --height 240</parameters>
+        <node>icub23</node>
+    </module>
+
+    <module>
+        <name> rescale </name>
+        <parameters> --name /rescale/right --width 320 --height 240</parameters>
+        <node>icub23</node>
+    </module>
+
+    <module>
+        <name> yarpview </name>
+        <parameters> --name /scaled/right </parameters>
+        <node>icub23</node>
+    </module>
+
+    <module>
+        <name> yarpview </name>
+        <parameters> --name /scaled/left </parameters>
+        <node>icub23</node>
+    </module>
+
+
+    <connection>
+        <from>/icub/cam/left</from>
+        <to>/rescale/left/img:i</to>
+        <protocol>udp</protocol>
+    </connection>
+
+    <connection>
+        <from>/rescale/left/img:o</from>
+        <to>/scaled/left</to>
+        <protocol>udp</protocol>
+    </connection>
+
+    <connection>
+        <from>/icub/cam/right</from>
+        <to>/rescale/right/img:i</to>
+        <protocol>udp</protocol>
+    </connection>
+
+    <connection>
+        <from>/rescale/right/img:o</from>
+        <to>/scaled/right</to>
+        <protocol>udp</protocol>
+    </connection>
+
+
+
+</application>
